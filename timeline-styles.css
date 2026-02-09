@@ -147,7 +147,8 @@
     }
 
     .timeline-item::before {
-        left: 30px;
+        left: 30px !important;
+        right: auto !important;
     }
 
     .timeline-item {
