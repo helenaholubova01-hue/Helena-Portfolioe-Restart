@@ -1,0 +1,479 @@
+:root {
+    --primary: #212529;
+    /* Antracitová z obrázku */
+    --secondary: #2d2e33;
+    --accent: #d4a373;
+    /* Pískově zlatá z obrázku */
+    --accent-hover: #c29263;
+    --text-light: #ffffff;
+    --text-dark: #212529;
+    --text-muted: #4a5568;
+    --bg-light: #ffffff;
+    --bg-alt: #f4f6f9;
+    --transition: all 0.3s ease;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- HERO SECTION --- */
+#hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    background-color: #1a1c22;
+    color: var(--text-light);
+    overflow: hidden;
+}
+
+
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--accent);
+    color: var(--primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+}
+
+#hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    margin-bottom: 1.5rem;
+}
+
+#hero .subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #d4a373;
+    /* Přesná barva z obrázku */
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.btn-primary:hover {
+    background: #c49363;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 163, 115, 0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.btn-outline:hover {
+    border-color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- SECTIONS --- */
+section {
+    padding: 6rem 0;
+}
+
+.section-title {
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--accent);
+}
+
+/* --- CARDS / GRID --- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+#mindset {
+    background: var(--white);
+    color: var(--text-dark);
+}
+
+#mindset h2 {
+    color: var(--text-dark);
+}
+
+.card {
+    background: #f1f4f8;
+    /* Jemně šedý podklad z předlohy */
+    padding: 3.5rem 2.5rem;
+    border-radius: 12px;
+    transition: var(--transition);
+    border-top: 4px solid transparent;
+    /* Ta oblíbená linka nahoře */
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    background: var(--white);
+    border-top: 6px solid var(--accent);
+    /* Ta oblíbená linka nahoře se zvýrazní */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    /* Hlubší, luxusní stín */
+}
+
+.card:hover i {
+    opacity: 1;
+    /* Pouze mírné zvýraznění průhlednosti pro pocit interaktivity */
+}
+
+.card i {
+    font-size: 3.8rem;
+    color: var(--accent);
+    margin-bottom: 2.5rem;
+    display: block;
+    opacity: 0.85;
+    transition: var(--transition);
+    /* Plynulý přechod ikony */
+}
+
+.card h3 {
+    margin-bottom: 1.2rem;
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    font-weight: 800;
+}
+
+.card p {
+    color: #4a5568;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+    flex-grow: 1;
+}
+
+/* --- UX/CONTENT SPECIALS --- */
+.vision-section {
+    background-color: var(--primary);
+    color: var(--text-light);
+}
+
+.vision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+@media (max-width: 992px) {
+    .vision-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.skill-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #ffffff;
+    color: #4a5568;
+    /* Tmavší pro lepší čitelnost */
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin: 0.3rem 0.3rem 0.3rem 0;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.card:hover .skill-tag {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: #ffffff;
+}
+
+/* --- SHOWCASE / PORTFOLIO --- */
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+}
+
+#showcase {
+    background: #f8fafc;
+    color: var(--text-dark);
+}
+
+#showcase .section-title {
+    color: var(--text-dark);
+}
+
+/* --- SHOWCASE / PORTFOLIO (Premium Mockup) --- */
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+}
+
+.showcase-item {
+    background: var(--secondary);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.showcase-item:hover {
+    box-shadow: 0 25px 50px rgba(212, 163, 115, 0.15);
+    border-color: var(--accent);
+}
+
+/* --- SHOWCASE / DEVICE LAYOUT --- */
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 4rem;
+}
+
+.showcase-item {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.device-mockup-wrapper {
+    width: 100%;
+    height: 450px;
+    background: #f8fafc;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.mockup-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 12s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    transform: translateY(0);
+}
+
+.showcase-item:hover .mockup-image {
+    transform: translateY(calc(-100% + 450px));
+}
+
+/* Úplné odstranění starých mockup stylů */
+.laptop-body,
+.phone-body {
+    display: none;
+}
+
+.showcase-content {
+    padding: 2.5rem;
+    background: white;
+    border-top: 1px solid #f1f5f9;
+}
+
+.showcase-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.showcase-content p {
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+#timeline-demo {
+    background: var(--bg-alt);
+    color: var(--text-dark);
+}
+
+#timeline-demo .section-title {
+    color: var(--text-dark);
+}
+
+.timeline-content {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--accent);
+}
+
+.timeline-content h3 {
+    color: var(--text-dark);
+}
+
+/* --- AI SECTION --- */
+.ai-section {
+    background: radial-gradient(circle at top right, #2d2d2d, #1a1a1a);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+    color: var(--white);
+}
+
+.ai-section p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.ai-section .section-title {
+    color: var(--white);
+}
+
+.ai-section .section-title::after {
+    background: var(--accent);
+}
+
+#kontakt {
+    background: var(--white);
+    color: var(--text-dark);
+}
+
+#kontakt .section-title {
+    color: var(--text-dark);
+}
+
+.vision-text p {
+    color: var(--text-dark);
+    opacity: 0.85;
+}
+
+/* --- FOOTER REFINEMENT --- */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+    }
+
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-social {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.footer-social a {
+    transition: var(--transition);
+}
+
+.footer-social a:hover {
+    background: var(--accent) !important;
+    color: #1a1c22 !important;
+    transform: translateY(-3px);
+}
+
+/* --- ANIMATIONS --- */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+[data-reveal].revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
