@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redesign patičky – Restart muže | Helena Holubová</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=IBM+Plex+Sans+Condensed:wght@400;600;700&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=2">
+    <style>
+        /* ===== CASE STUDY OVERRIDES ===== */
+
+        /* Navigační lišta zpět */
+        .cs-nav {
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .cs-nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .cs-nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .cs-nav-back:hover {
+            color: var(--accent);
+        }
+
+        .cs-nav-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Hero case study */
+        .cs-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            padding: 5rem 0 4rem;
+        }
+
+        .cs-tag {
+            display: inline-block;
+            background: rgba(243, 112, 33, 0.15);
+            border: 1px solid rgba(243, 112, 33, 0.4);
+            color: #f37021;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .cs-hero h1 {
+            font-family: 'IBM Plex Sans Condensed', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            line-height: 1.1;
+            margin-bottom: 1.25rem;
+            color: #fff;
+        }
+
+        .cs-hero p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            max-width: 620px;
+            line-height: 1.7;
+        }
+
+        .cs-meta {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cs-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .cs-meta-item span:first-child {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+        }
+
+        .cs-meta-item span:last-child {
+            font-size: 0.95rem;
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        /* Sekce obsahu */
+        .cs-section {
+            padding: 5rem 0;
+        }
+
+        .cs-section-alt {
+            background: #f8fafc;
+        }
+
+        .cs-section-title {
+            font-family: 'IBM Plex Sans Condensed', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-section-sub {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Before screenshot */
+        .cs-before-frame {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .cs-before-frame img {
+            width: 100%;
+            display: block;
+            /* Zobrazíme jen spodní část screenshotu – patičku */
+            object-fit: cover;
+            object-position: bottom;
+            max-height: 320px;
+        }
+
+        .cs-before-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: #ef4444;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        .cs-after-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: #22c55e;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        /* Problémy / zlepšení lista */
+        .cs-issues {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .cs-issue {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.9rem 1.1rem;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .cs-issue i {
+            font-size: 1rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .cs-issue.bad i { color: #ef4444; }
+        .cs-issue.good i { color: #22c55e; }
+
+        .cs-issue p {
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Before/After grid */
+        .cs-compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* After – iframe okno */
+        .cs-iframe-wrap {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .cs-iframe-wrap iframe {
+            width: 100%;
+            height: 380px;
+            border: none;
+            display: block;
+            /* Ukazujeme jen patičku – posuneme scroll dolů */
+        }
+
+        /* Shrnutí */
+        .cs-summary {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            padding: 4rem 0;
+        }
+
+        .cs-summary h2 {
+            font-family: 'IBM Plex Sans Condensed', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .cs-summary p {
+            color: #94a3b8;
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 700px;
+        }
+
+        .cs-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .cs-stat {
+            text-align: center;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+        }
+
+        .cs-stat .num {
+            font-family: 'IBM Plex Sans Condensed', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f37021;
+            display: block;
+        }
+
+        .cs-stat .lbl {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .cs-before-frame img {
+            cursor: zoom-in;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cs-before-frame img:hover {
+            transform: scale(1.01);
+        }
+
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 95vw;
+            max-height: 92vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+            cursor: default;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.5rem;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-hint {
+            position: absolute;
+            bottom: 0.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.5);
+            pointer-events: none;
+        }
+
+        /* ===== RESPONSIVITA ===== */
+        @media (max-width: 768px) {
+            .cs-compare-grid {
+                grid-template-columns: 1fr;
+            }
+            .cs-summary-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .cs-meta {
+                gap: 1.5rem;
+            }
+        }
+
+        /* ===== FOOTER (nová patička Restart muže – živá) ===== */
+        .rm-footer {
+            background: #000e17;
+            color: #fff;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .rm-footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Newsletter banner */
+        .rm-footer-newsletter {
+            background: #f37021;
+            padding: 2.5rem 0;
+        }
+
+        .rm-footer-newsletter .rm-footer-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .rm-footer-newsletter p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            max-width: 450px;
+            margin: 0;
+        }
+
+        .rm-newsletter-form {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .rm-newsletter-form input {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-family: 'Open Sans', sans-serif;
+            width: 250px;
+            outline: none;
+        }
+
+        .rm-newsletter-form button {
+            padding: 0.75rem 1.5rem;
+            background: #000e17;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* Hlavní tělo patičky */
+        .rm-footer-body {
+            padding: 4rem 0 3rem;
+        }
+
+        .rm-footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.4fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .rm-footer-col h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #f37021;
+            margin-bottom: 1.25rem;
+        }
+
+        .rm-footer-brand-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+
+        .rm-footer-brand p {
+            color: #8a9db5;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .rm-social-icons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .rm-social-icons a {
+            width: 38px;
+            height: 38px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .rm-social-icons a:hover { background: #f37021; }
+
+        .rm-footer-nav ul { list-style: none; padding: 0; margin: 0; }
+        .rm-footer-nav ul li { margin-bottom: 0.65rem; }
+        .rm-footer-nav ul li a {
+            color: #8a9db5;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .rm-footer-nav ul li a:hover { color: #f37021; }
+
+        .rm-footer-legal p {
+            color: #8a9db5;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            margin-bottom: 0.25rem;
+        }
+
+        .rm-footer-legal .rm-ico {
+            font-size: 0.8rem;
+            color: #5a6e80;
+            margin-top: 0.75rem;
+        }
+
+        .rm-footer-legal a {
+            color: #8a9db5;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .rm-footer-legal a:hover { color: #f37021; }
+
+        /* Disclaimer */
+        .rm-footer-disclaimer {
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding: 1.5rem 0;
+        }
+
+        .rm-footer-disclaimer p {
+            font-size: 0.78rem;
+            color: #4a6070;
+            line-height: 1.7;
+            margin: 0;
+            width: 100%;
+            max-width: none;
+        }
+
+        /* Copyright */
+        .rm-footer-bottom {
+            background: rgba(0,0,0,0.3);
+            padding: 1rem 0;
+        }
+
+        .rm-footer-bottom .rm-footer-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .rm-footer-bottom p {
+            font-size: 0.8rem;
+            color: #4a6070;
+            margin: 0;
+        }
+
+        .rm-footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .rm-footer-bottom-links a {
+            font-size: 0.8rem;
+            color: #4a6070;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .rm-footer-bottom-links a:hover { color: #f37021; }
+
+        /* Footer responsive */
+        @media (max-width: 900px) {
+            .rm-footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .rm-footer-brand { grid-column: 1 / -1; }
+        }
+
+        @media (max-width: 580px) {
+            .rm-footer-newsletter .rm-footer-container { flex-direction: column; align-items: flex-start; }
+            .rm-newsletter-form input { width: 100%; }
+            .rm-footer-grid { grid-template-columns: 1fr; }
+            .rm-footer-bottom .rm-footer-container { flex-direction: column; text-align: center; }
+            .rm-footer-bottom-links { justify-content: center; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigace zpět -->
+    <nav class="cs-nav">
+        <div class="container">
+            <a href="index.html" class="cs-nav-back">
+                <i class="fas fa-arrow-left"></i>
+                Zpět na portfolio
+            </a>
+            <span class="cs-nav-label">Case study · Restart muže</span>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="cs-hero">
+        <div class="container">
+            <span class="cs-tag">Case study · UX &amp; Design</span>
+            <h1>Redesign patičky<br>Restart muže</h1>
+            <p>Analýza problémů stávající patičky a návrh nového řešení – přehledná struktura, jednotné fonty a jasná hierarchie informací.</p>
+            <div class="cs-meta">
+                <div class="cs-meta-item">
+                    <span>Klient</span>
+                    <span>Restart muže s.r.o.</span>
+                </div>
+                <div class="cs-meta-item">
+                    <span>Typ práce</span>
+                    <span>UX analýza + redesign</span>
+                </div>
+                <div class="cs-meta-item">
+                    <span>Technologie</span>
+                    <span>HTML · CSS · Divi</span>
+                </div>
+                <div class="cs-meta-item">
+                    <span>Rok</span>
+                    <span>2026</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+
+        <!-- PŘED – analýza problémů -->
+        <section class="cs-section cs-section-alt">
+            <div class="container">
+                <div class="cs-compare-grid">
+
+                    <div>
+                        <p style="font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #ef4444; margin-bottom: 0.75rem;">Stávající stav</p>
+                        <h2 class="cs-section-title">Co nefunguje</h2>
+                        <p class="cs-section-sub">Patička působí jako textový dokument – bez vizuální hierarchie, bez rytmu, bez záměru.</p>
+
+                        <div class="cs-issues">
+                            <div class="cs-issue bad">
+                                <i class="fas fa-times-circle"></i>
+                                <p><strong>Nejednotné fonty</strong> – různé řezy a velikosti bez systému, text splývá</p>
+                            </div>
+                            <div class="cs-issue bad">
+                                <i class="fas fa-times-circle"></i>
+                                <p><strong>Žádná vizuální hierarchie</strong> – nadpisy, texty a odkazy vypadají stejně</p>
+                            </div>
+                            <div class="cs-issue bad">
+                                <i class="fas fa-times-circle"></i>
+                                <p><strong>Chybí newsletter sekce</strong> – nejsilnější CTA není vidět</p>
+                            </div>
+                            <div class="cs-issue bad">
+                                <i class="fas fa-times-circle"></i>
+                                <p><strong>Sociální sítě nejsou viditelné</strong> – schované jako prostý text</p>
+                            </div>
+                            <div class="cs-issue bad">
+                                <i class="fas fa-times-circle"></i>
+                                <p><strong>Firemní údaje jsou přetížené</strong> – nesrozumitelný blok textu</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="cs-before-frame">
+                            <span class="cs-before-badge">Před</span>
+                            <img src="img/puvodni footer.JPG"
+                                 alt="Původní patička Restart muže"
+                                 style="object-position: top; max-height: 400px;"
+                                 onclick="openLightbox(this)">
+                            <span class="lightbox-hint">🔍 Klikni pro zvětšení</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PO – co se zlepšilo -->
+        <section class="cs-section">
+            <div class="container">
+                <div class="cs-compare-grid" style="align-items: center;">
+
+                    <div>
+                        <p style="font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #22c55e; margin-bottom: 0.75rem;">Návrh redesignu</p>
+                        <h2 class="cs-section-title">Co se změnilo</h2>
+                        <p class="cs-section-sub">Nová patička pracuje s obsahem – každý prvek má své místo a svůj účel.</p>
+
+                        <div class="cs-issues">
+                            <div class="cs-issue good">
+                                <i class="fas fa-check-circle"></i>
+                                <p><strong>Newsletter banner</strong> – oranžový proužek, okamžitě viditelný, silný CTA</p>
+                            </div>
+                            <div class="cs-issue good">
+                                <i class="fas fa-check-circle"></i>
+                                <p><strong>4-sloupcový grid</strong> – Brand, Obsah, O nás, Provozovatel. Vše přehledné.</p>
+                            </div>
+                            <div class="cs-issue good">
+                                <i class="fas fa-check-circle"></i>
+                                <p><strong>Sociální ikony jako kruhy</strong> – vizuálně čisté, hover efekt oranžový</p>
+                            </div>
+                            <div class="cs-issue good">
+                                <i class="fas fa-check-circle"></i>
+                                <p><strong>Jednotné fonty</strong> – Montserrat pro nadpisy, Open Sans pro text (stejné jako web)</p>
+                            </div>
+                            <div class="cs-issue good">
+                                <i class="fas fa-check-circle"></i>
+                                <p><strong>Disclaimer správně zarovnaný</strong> – doleva, čitelný, nepřebíjí copyright</p>
+                            </div>
+                            <div class="cs-issue good">
+                                <i class="fas fa-check-circle"></i>
+                                <p><strong>Plně responsivní</strong> – 2 sloupce na tabletu, 1 sloupec na mobilu</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; text-align: center;">
+                            <i class="fas fa-arrow-down" style="color: var(--accent);"></i>
+                            Živá verze nové patičky je níže jako součást této stránky
+                        </p>
+                        <div style="background: #000e17; border-radius: 12px; padding: 1.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                                <span style="width: 12px; height: 12px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
+                                <span style="width: 12px; height: 12px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
+                                <span style="width: 12px; height: 12px; border-radius: 50%; background: #22c55e; display: inline-block;"></span>
+                            </div>
+                            <p style="color: #4a6070; font-size: 0.82rem; margin: 0; font-family: monospace;">
+                                &lt;footer&gt; Restart muže – návrh 2026 &lt;/footer&gt;<br>
+                                <span style="color: #22c55e;">✓ Live HTML · CSS</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Shrnutí -->
+        <section class="cs-summary">
+            <div class="container">
+                <h2>Co tento návrh dokazuje</h2>
+                <p>Redesign patičky není jen kosmetická změna. Je to systémové myšlení – pochopení, co každý prvek dělá, komu slouží a jak by měl vypadat, aby podporoval cíle webu i důvěru uživatelů.</p>
+                <div class="cs-summary-grid">
+                    <div class="cs-stat">
+                        <span class="num">5</span>
+                        <span class="lbl">identifikovaných problémů</span>
+                    </div>
+                    <div class="cs-stat">
+                        <span class="num">4</span>
+                        <span class="lbl">obsahové sekce v gridu</span>
+                    </div>
+                    <div class="cs-stat">
+                        <span class="num">3</span>
+                        <span class="lbl">breakpointy responsivity</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== NOVÁ PATIČKA RESTART MUŽE – ŽIVÁ SOUČÁST STRÁNKY ===== -->
+    <footer class="rm-footer">
+
+        <!-- Newsletter banner -->
+        <div class="rm-footer-newsletter">
+            <div class="rm-footer-container">
+                <p>Přihlas se k odběru newsletteru,<br>ať ti nic neunikne.</p>
+                <form class="rm-newsletter-form" onsubmit="return false;">
+                    <input type="email" placeholder="Tvůj e-mail">
+                    <button type="submit">Chci novinky</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Hlavní tělo -->
+        <div class="rm-footer-body">
+            <div class="rm-footer-container">
+                <div class="rm-footer-grid">
+
+                    <!-- Sloupec 1: Brand + Social -->
+                    <div class="rm-footer-col rm-footer-brand">
+                        <h4>Restart muže</h4>
+                        <a href="https://www.restartmuze.cz" target="_blank" rel="noopener" style="display: inline-block; margin-bottom: 1.25rem;">
+                            <img src="img/restartmuze-logo-cmyknew-461x128-1.png" alt="Restart muže" style="height: 40px; width: auto;">
+                        </a>
+                        <p>Pomáháme mužům najít směr, posílit vztahy a stát se tím, kým chce každý chlap být. Komunita přes 10 000 mužů.</p>
+                        <div class="rm-social-icons">
+                            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                            <a href="#" title="Spotify"><i class="fab fa-spotify"></i></a>
+                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Sloupec 2: Obsah -->
+                    <div class="rm-footer-col rm-footer-nav">
+                        <h4>Obsah</h4>
+                        <ul>
+                            <li><a href="#">Webináře zdarma</a></li>
+                            <li><a href="#">Kurzy</a></li>
+                            <li><a href="#">Komunita – Klub</a></li>
+                            <li><a href="#">Podcasty &amp; videa</a></li>
+                            <li><a href="#">Kniha Restart muže</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Sloupec 3: O nás -->
+                    <div class="rm-footer-col rm-footer-nav">
+                        <h4>O nás</h4>
+                        <ul>
+                            <li><a href="#">Kdo jsme</a></li>
+                            <li><a href="#">Příběhy mužů</a></li>
+                            <li><a href="#">Média o nás</a></li>
+                            <li><a href="#">Kontakt</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Sloupec 4: Firemní údaje -->
+                    <div class="rm-footer-col rm-footer-legal">
+                        <h4>Provozovatel</h4>
+                        <p>Restart muže s.r.o.</p>
+                        <p>Kyjevská 1937/64<br>326 00 Plzeň</p>
+                        <p><a href="mailto:podpora@restartmuze.cz">podpora@restartmuze.cz</a></p>
+                        <p class="rm-ico">IČO: 10947116<br>DIČ: CZ10947116</p>
+                        <p class="rm-ico" style="margin-top: 0.5rem;">Zapsáno v obch. rejstříku<br>KS Plzeň, odd. C, vložka 40854</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="rm-footer-disclaimer">
+            <div class="rm-footer-container">
+                <p>Upozorňujeme, že se nejedná o psychologické či psychoterapeutické služby ani o párovou terapii. V případě pochybností se obraťte na příslušného odborníka z řad psychologů či psychoterapeutů. Na webu mohou být uvedeny recenze (bývalých) klientů Poskytovatele. Všechny tyto recenze jsou ověřené. Poskytovatel průběžně sbírá zpětné vazby od svých klientů a vybrané reference zveřejňuje. Recenze na platformách třetích stran Poskytovatel neověřuje.</p>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="rm-footer-bottom">
+            <div class="rm-footer-container">
+                <p>© 2026 Restart muže s.r.o. Všechna práva vyhrazena.</p>
+                <div class="rm-footer-bottom-links">
+                    <a href="#">Obchodní podmínky</a>
+                    <a href="#">Cookies</a>
+                    <a href="#">GDPR</a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        function openLightbox(img) {
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox-img').alt = img.alt;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+
+</body>
+</html>

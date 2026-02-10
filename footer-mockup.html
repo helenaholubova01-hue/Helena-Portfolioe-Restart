@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Návrh patičky – Restart muže</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f0f0f0;
+            padding: 2rem;
+        }
+
+        .label {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #000e17;
+            color: #fff;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Newsletter banner --- */
+        .footer-newsletter {
+            background: #f37021;
+            padding: 2.5rem 2rem;
+        }
+
+        .footer-newsletter .footer-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-newsletter p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            max-width: 450px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-form input {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-family: 'Open Sans', sans-serif;
+            width: 250px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 0.75rem 1.5rem;
+            background: #000e17;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* --- Hlavní tělo patičky --- */
+        .footer-body {
+            padding: 4rem 2rem 3rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.4fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #f37021;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Sloupec 1 – Brand */
+        .footer-brand-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand p {
+            color: #8a9db5;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            width: 38px;
+            height: 38px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .social-icons a:hover {
+            background: #f37021;
+        }
+
+        /* Sloupce 2 a 3 – Navigace */
+        .footer-nav ul {
+            list-style: none;
+        }
+
+        .footer-nav ul li {
+            margin-bottom: 0.65rem;
+        }
+
+        .footer-nav ul li a {
+            color: #8a9db5;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-nav ul li a:hover {
+            color: #f37021;
+        }
+
+        /* Sloupec 4 – Kontakt / firma */
+        .footer-legal p {
+            color: #8a9db5;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            margin-bottom: 0.25rem;
+        }
+
+        .footer-legal .ico {
+            font-size: 0.8rem;
+            color: #5a6e80;
+            margin-top: 0.75rem;
+        }
+
+        /* --- Disclaimer --- */
+        .footer-disclaimer {
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding: 1.5rem 0;
+        }
+
+        .footer-disclaimer p {
+            font-size: 0.78rem;
+            color: #4a6070;
+            line-height: 1.7;
+        }
+
+        /* --- Copyright --- */
+        .footer-bottom {
+            background: rgba(0,0,0,0.3);
+            padding: 1rem 0;
+        }
+
+        .footer-bottom .footer-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: #4a6070;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-links a {
+            font-size: 0.8rem;
+            color: #4a6070;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #f37021;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 580px) {
+            .footer-newsletter .footer-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .newsletter-form input {
+                width: 100%;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-bottom-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<p class="label">Návrh patičky – Restart muže · Helena Holubová 2026</p>
+
+<footer>
+
+    <!-- Newsletter banner -->
+    <div class="footer-newsletter">
+        <div class="footer-container">
+            <p>Přihlas se k odběru newsletteru,<br>ať ti nic neunikne.</p>
+            <form class="newsletter-form" onsubmit="return false;">
+                <input type="email" placeholder="Tvůj e-mail">
+                <button type="submit">Chci novinky</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hlavní tělo -->
+    <div class="footer-body">
+        <div class="footer-container">
+            <div class="footer-grid">
+
+                <!-- Sloupec 1: Brand + Social -->
+                <div class="footer-col footer-brand">
+                    <h4>Restart muže</h4>
+                    <a href="https://www.restartmuze.cz" target="_blank" rel="noopener" style="display: inline-block; margin-bottom: 1.25rem;">
+                        <img src="img/restartmuze-logo-cmyknew-461x128-1.png" alt="Restart muže" style="height: 40px; width: auto;">
+                    </a>
+                    <p>Pomáháme mužům najít směr, posílit vztahy a stát se tím, kým chce každý chlap být. Komunita přes 10 000 mužů.</p>
+                    <div class="social-icons">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" title="Spotify"><i class="fab fa-spotify"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Sloupec 2: Obsah -->
+                <div class="footer-col footer-nav">
+                    <h4>Obsah</h4>
+                    <ul>
+                        <li><a href="#">Webináře zdarma</a></li>
+                        <li><a href="#">Kurzy</a></li>
+                        <li><a href="#">Komunita – Klub</a></li>
+                        <li><a href="#">Podcasty & videa</a></li>
+                        <li><a href="#">Kniha Restart muže</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sloupec 3: O nás -->
+                <div class="footer-col footer-nav">
+                    <h4>O nás</h4>
+                    <ul>
+                        <li><a href="#">Kdo jsme</a></li>
+                        <li><a href="#">Příběhy mužů</a></li>
+                        <li><a href="#">Média o nás</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sloupec 4: Firemní údaje -->
+                <div class="footer-col footer-legal">
+                    <h4>Provozovatel</h4>
+                    <p>Restart muže s.r.o.</p>
+                    <p>Kyjevská 1937/64<br>326 00 Plzeň</p>
+                    <p><a href="mailto:podpora@restartmuze.cz" style="color: #8a9db5; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#f37021'" onmouseout="this.style.color='#8a9db5'">podpora@restartmuze.cz</a></p>
+                    <p class="ico">IČO: 10947116<br>DIČ: CZ10947116</p>
+                    <p class="ico" style="margin-top: 0.5rem;">Zapsáno v obch. rejstříku<br>KS Plzeň, odd. C, vložka 40854</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="footer-disclaimer">
+        <div class="footer-container">
+            <p>Upozorňujeme, že se nejedná o psychologické či psychoterapeutické služby ani o párovou terapii. V případě pochybností se obraťte na příslušného odborníka z řad psychologů či psychoterapeutů. Na webu mohou být uvedeny recenze (bývalých) klientů Poskytovatele. Všechny tyto recenze jsou ověřené. Poskytovatel průběžně sbírá zpětné vazby od svých klientů a vybrané reference zveřejňuje. Recenze na platformách třetích stran Poskytovatel neověřuje.</p>
+        </div>
+    </div>
+
+    <!-- Copyright + právní odkazy -->
+    <div class="footer-bottom">
+        <div class="footer-container">
+            <p>© 2026 Restart muže s.r.o. Všechna práva vyhrazena.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Obchodní podmínky</a>
+                <a href="#">Cookies</a>
+                <a href="#">GDPR</a>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+</body>
+</html>
