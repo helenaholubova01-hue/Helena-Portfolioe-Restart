@@ -336,6 +336,13 @@ section {
     opacity: 1;
 }
 
+@media (max-width: 1024px) {
+    .mockup-overlay {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.35);
+    }
+}
+
 .showcase-item:hover {
     box-shadow: 0 25px 50px rgba(212, 163, 115, 0.15);
     border-color: var(--accent);
