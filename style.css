@@ -312,12 +312,12 @@ section {
 .mockup-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.35);
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    opacity: 1;
+    transition: background 0.3s ease;
     border-radius: 0;
 }
 
@@ -333,14 +333,7 @@ section {
 }
 
 .mockup-link:hover .mockup-overlay {
-    opacity: 1;
-}
-
-@media (max-width: 1024px) {
-    .mockup-overlay {
-        opacity: 1;
-        background: rgba(0, 0, 0, 0.35);
-    }
+    background: rgba(0, 0, 0, 0.55);
 }
 
 .showcase-item:hover {

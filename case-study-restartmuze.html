@@ -358,6 +358,15 @@
             .cs-meta {
                 gap: 1.5rem;
             }
+            /* Před/Po sekce: snížený padding, aby karty byly blíž k sobě */
+            .cs-section-alt,
+            .cs-section:not(.cs-section-alt):has(.cs-compare-grid) {
+                padding: 2rem 0 !important;
+            }
+            /* Po sekci: obrázek před text, aby před/po byly za sebou */
+            .cs-section:not(.cs-section-alt) .cs-compare-grid > div:last-child {
+                order: -1;
+            }
         }
 
         /* ===== FOOTER (nová patička Restart muže – živá) ===== */
@@ -625,7 +634,7 @@
         <!-- PŘED – analýza problémů -->
         <section class="cs-section cs-section-alt">
             <div class="container">
-                <div class="cs-compare-grid" style="align-items: center;">
+                <div class="cs-compare-grid" style="align-items: end;">
 
                     <div>
                         <p style="font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #ef4444; margin-bottom: 0.75rem;">Stávající stav</p>
@@ -714,7 +723,9 @@
                             <span class="cs-before-badge" style="background: #22c55e;">Po</span>
                             <img src="img/novy footer2.JPG"
                                  alt="Nová patička Restart muže"
-                                 style="object-position: top; max-height: 400px;">
+                                 style="object-position: top; max-height: 400px;"
+                                 onclick="openLightbox(this)">
+                            <span class="lightbox-hint">🔍 Klikni pro zvětšení</span>
                         </div>
                         <div style="text-align: center; margin-top: 1rem;">
                             <i class="fas fa-arrow-down" style="color: var(--accent); font-size: 1.4rem; display: block; margin-bottom: 0.4rem;"></i>
